@@ -65,6 +65,7 @@ print(f'총 {total_img_cnt}')
 
 # 반복문으로 하나씩 클릭하고 다운로드
 crt_dir = os.getcwd()
+exception_img_cnt = 0
 for img in all_imgs:
     try:
         img.click()
@@ -72,13 +73,13 @@ for img in all_imgs:
         img_element = driver.find_element(By.CSS_SELECTOR, 'img.sFlh5c.pT0Scc.iPVvYb')
         img_src = img_element.get_attribute('src')
        
-        print(img_element)
-        print(img_src)
         down_from_url(img_src, f'{crt_dir}\\images\\{query}_{wanted_img_size}\\')
     except:
         # 가끔씩 다운로드가 안되는 이미지들이 있음, 그럴 경우 그냥 넘어가기
         print('클릭  -> 다운로드 중에 문제가 발생하였지만 다음 요소로 넘어갑니다.')
+        exception_img_cnt +=1
         pass
 
-print(f'총 {total_img_cnt}')
+print(f'총 {total_img_cnt}개의 검색 결과에서 {exception_img_cnt}개의 에러를 제외하고')
+print(f'총 {total_img_cnt-exception_img_cnt}개를 다운받았습니다.')
 driver.quit()

@@ -1,6 +1,7 @@
 import os
 import urllib.request
 
+# url주소와 폴더 경로를 받아 해당 이미지를 다운로드 받는 함수
 def down_from_url(url, folder_path):
     # 폴더 경로가 존재하는지 확인하고, 없으면 생성
     if not os.path.exists(folder_path):
