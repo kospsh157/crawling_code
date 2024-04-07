@@ -14,7 +14,7 @@ s = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=s)
 
 # 검색 옵션들 현재는 검색어와, 이미지 사이즈 2가지만 선택 가능합니다.
-query = 'side of the car'
+query = 'SUV car side view'
 # 400 = 400*300, 640 = 640*480, 800 = 800*600
 wanted_img_size = 640
 

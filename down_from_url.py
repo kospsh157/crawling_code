@@ -11,13 +11,13 @@ def down_from_url(url, folder_path):
     base_filename = "img"
     extension = ".jpg"
     counter = 1
-    file_path = os.path.join(folder_path, f"{base_filename}{extension}")
+    file_path = os.path.join(folder_path, f"{base_filename}_{counter}{extension}")
 
     # 파일명 중복 방지
     while os.path.exists(file_path):
-        file_path = os.path.join(folder_path, f"{base_filename}_{counter}{extension}")
         counter += 1
-
+        file_path = os.path.join(folder_path, f"{base_filename}_{counter}{extension}")
+        
     # 이미지 URL
     img_src = url
 
