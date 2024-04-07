@@ -29,10 +29,15 @@ def down_from_url(url, folder_path):
     )
 
     # 요청을 사용하여 웹에서 이미지 데이터를 가져옴
-    with urllib.request.urlopen(req) as response:
-        # 파일 저장
-        with open(file_path, 'wb') as out_file:
-            data = response.read()  # 이미지 데이터를 읽음
-            out_file.write(data)  # 파일에 데이터를 쓴다
+    try:
+        with urllib.request.urlopen(req, timeout=5) as response: # 서버가 응답을 안하면 urloppen은 기본적으로 블록킹 방식으로 작동하기 때문에 서버가 응답할때까지 프로그램은 멈추게 된다. 따라서 반드시 timeout이 있어야 한다.
+            # 파일 저장
+            with open(file_path, 'wb') as out_file:
+                data = response.read()
+                out_file.write(data)  # 파일에 데이터를 쓴다
+    except Exception as e:
+        print(e)
+        pass
+        
 
     print(f"이미지가 {file_path}에 성공적으로 다운로드되었습니다.")

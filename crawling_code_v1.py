@@ -1,4 +1,6 @@
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -7,16 +9,18 @@ from down_from_url import down_from_url
 import os
 
 
+# webdriver_manager를 통해 크롬 드라이버 자동 설정
+s = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=s)
+
 # 검색 옵션들
-query = 'wheel'
-# 400 = 400*300, 640 = 640*480, 800 = 800*600 
-wanted_img_size = 400
+query = 'side of the car'
+# 400 = 400*300, 640 = 640*480, 800 = 800*600
+wanted_img_size = 640
 
 
-driver = webdriver.Chrome()
-driver.implicitly_wait(3) # 이거는 요소를 찾으면 3초 이전에 바로 실행, 3초 동안 못 찾으면 예외 발생시킴 (이거는 전역 설정이므로 여기서 한번만 설정하면 이후의 모든 find_element()함수에 적용된다. )
+driver.implicitly_wait(3) # 요소를 찾으면 3초 이전에 바로 실행, 3초 동안 못 찾으면 예외 발생시킴 (이거는 전역 설정이므로 여기서 한번만 설정하면 이후의 모든 find_element()함수에 적용된다. )
 url = 'https://images.google.com/advanced_image_search?hl=ko'
-
 driver.get(url)
 search_input = driver.find_element(By.ID, "xX4UFf")
 search_input.send_keys(query)
@@ -68,7 +72,9 @@ for img in all_imgs:
         img_element = driver.find_element(By.CSS_SELECTOR, 'img.sFlh5c.pT0Scc.iPVvYb')
         img_src = img_element.get_attribute('src')
        
-        down_from_url(img_src, f'{crt_dir}\\{query}_{wanted_img_size}\\')
+        print(img_element)
+        print(img_src)
+        down_from_url(img_src, f'{crt_dir}\\images\\{query}_{wanted_img_size}\\')
     except:
         # 가끔씩 다운로드가 안되는 이미지들이 있음, 그럴 경우 그냥 넘어가기
         print('클릭  -> 다운로드 중에 문제가 발생하였지만 다음 요소로 넘어갑니다.')
