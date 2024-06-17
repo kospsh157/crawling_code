@@ -9,11 +9,12 @@ from down_from_url import down_from_url
 import os
 
 # webdriver_manager를 통해 크롬 드라이버 자동 설정
+# 사용 시스템 32기가 메모리 기준, 약 500~700개 정도 다운받을때 out of memory로 크롬이 팅깁니다.. 
 s = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=s)
 
 # 검색 옵션
-query = '야외 주차장 자동차 측면'
+query = 'car side view'
 wanted_img_size = 800
 
 driver.implicitly_wait(3)  # 요소를 찾으면 3초 이전에 바로 실행, 3초 동안 못 찾으면 예외 발생시킴
