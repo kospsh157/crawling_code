@@ -21,7 +21,7 @@ pip install selenium webdriver_manager
 4. v3 버전은 우회를 위한 코드인데, 아직 실험중입니다. 
 
 ```
-python crawling_code_v1.py
+python crawling_code_v2.py
 ```
 5. 크롤링 완료시 images/검색어_사이즈옵션값/ 폴더 안에 이미지들이 저장됩니다.
 
