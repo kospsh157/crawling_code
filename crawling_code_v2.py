@@ -67,7 +67,7 @@ stealth(driver,
 
 
 # 검색 옵션
-query = '자동차 실외 측면 주차'
+query = 'cars side view at parking lot'
 wanted_img_size = 800
 
 driver.implicitly_wait(3)  # 요소를 찾으면 3초 이전에 바로 실행, 3초 동안 못 찾으면 예외 발생시킴
